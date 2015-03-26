@@ -10,5 +10,10 @@
     "Couple"
   ],
   "author": "Jason Dreyzehner <jason@dreyzehner.com>",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "commander": "^2.7.1",
+    "phantomjs": "^1.9.16",
+    "prompt": "^0.2.14"
+  }
 }
