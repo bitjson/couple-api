@@ -1,0 +1,14 @@
+{
+  "name": "couple-miner",
+  "version": "0.0.1",
+  "description": "A miner for Couple App history.",
+  "main": "lib/couple-miner.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "Couple"
+  ],
+  "author": "Jason Dreyzehner <jason@dreyzehner.com>",
+  "license": "MIT"
+}
