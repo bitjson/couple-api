@@ -1,1 +1,9 @@
 #!/usr/bin/env node
+
+var commander = require('commander');
+var prompt = require('prompt');
+var CoupleMiner = require('../lib/couple-miner.js');
+
+commander
+  .version('0.0.1')
+  .parse(process.argv);
