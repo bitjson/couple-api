@@ -1,9 +1,30 @@
 #!/usr/bin/env node
 
-var commander = require('commander');
+var program = require('commander');
 var prompt = require('prompt');
 var CoupleMiner = require('../lib/couple-miner.js');
 
-commander
-  .version('0.0.1')
-  .parse(process.argv);
+program
+  .version('0.0.1');
+
+program
+  .command('auth [email] [password]')
+  .description('Authenticate with target Couple account.')
+  .action(function(em, pass, options){
+    var email = em || process.env.COUPLE_MINER_EMAIL || null;
+    var password = pass || process.env.COUPLE_MINER_PASSWORD || null;
+    if(!email || !password){
+      return console.log("Please provide the email and password of the target Couple account.");
+    }
+    var miner = new CoupleMiner({
+      email: email,
+      password: password
+    });
+  });
+
+
+program.parse(process.argv);
+
+if(!program.args.length) {
+    program.help();
+}
