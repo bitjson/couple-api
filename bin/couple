@@ -16,14 +16,12 @@ program
     if(!email || !password){
       return console.log("Please provide the email and password of the target Couple account.");
     }
-    var couple = new Couple({
-      email: email,
-      password: password
-    }, function(err, resObj){
+    var couple = new Couple();
+    couple.authenticate(email, password, function(err, resObj){
       if(err) {
         console.error(err);
       }
-      console.log(resObj);
+      console.log(couple.identify());
     });
   });
 
