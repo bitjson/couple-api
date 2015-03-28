@@ -19,9 +19,13 @@ program
     var couple = new Couple({
       email: email,
       password: password
+    }, function(err, resObj){
+      if(err) {
+        console.error(err);
+      }
+      console.log(resObj);
     });
   });
-
 
 program.parse(process.argv);
 
