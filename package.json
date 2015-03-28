@@ -1,17 +1,17 @@
 {
-  "name": "couple-miner",
+  "name": "couple-api",
   "version": "0.0.1",
-  "description": "A miner for Couple App history.",
-  "main": "lib/couple-miner.js",
+  "description": "An unofficial client for the Couple App API.",
+  "main": "lib/couple.js",
   "bin": {
-    "couple-miner": "bin/couple-miner"
+    "couple": "bin/couple"
   },
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/bitjson/couple-miner"
+    "url": "https://github.com/bitjson/couple-api"
   },
   "keywords": [
     "Couple"
@@ -19,9 +19,9 @@
   "author": "Jason Dreyzehner <jason@dreyzehner.com>",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/bitjson/couple-miner/issues"
+    "url": "https://github.com/bitjson/couple-api/issues"
   },
-  "homepage": "https://github.com/bitjson/couple-miner",
+  "homepage": "https://github.com/bitjson/couple-api",
   "dependencies": {
     "commander": "^2.7.1",
     "prompt": "^0.2.14",

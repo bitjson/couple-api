@@ -1,3 +1,3 @@
-# Couple Miner
+# Couple API (Unofficial)
 
-A miner for Couple App history.
+An unofficial client for the Couple App API.
