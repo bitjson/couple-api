@@ -1,7 +1,9 @@
 #!/usr/bin/env node
 
+'use strict';
+
 var program = require('commander');
-var prompt = require('prompt');
+// var prompt = require('prompt');
 var Couple = require('../lib/couple.js');
 
 program
@@ -14,7 +16,7 @@ program
     var email = em || process.env.COUPLE_EMAIL || null;
     var password = pass || process.env.COUPLE_PASSWORD || null;
     if(!email || !password){
-      return console.log("Please provide the email and password of the target Couple account.");
+      return console.log('Please provide the email and password of the target Couple account.');
     }
     var couple = new Couple();
     couple.authenticate(email, password, function(err, resObj){

@@ -1,3 +1,3 @@
 # Couple API (Unofficial)
 
-An unofficial client for the Couple App API.
+An unofficial client and command-line interface for the Couple App API.
