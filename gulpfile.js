@@ -4,7 +4,7 @@ var gulp = require('gulp');
 var $ = require('gulp-load-plugins')();
 var runSequence = require('run-sequence');
 var js = 'lib/*.js';
-var bin = 'bin/couple'
+var bin = 'bin/couple';
 var tests = 'test/**/*.{js, json}';
 var developing = false;
 
