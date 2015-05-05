@@ -4,12 +4,6 @@ var Couple = require('../');
 var assert = require('assert');
 var nock = require('nock');
 
-var nockOpts = {
-  reqheaders: {
-    'x-juliet-ver': Couple.version
-  }
-};
-
 describe('couple-api', function() {
 
   describe('client', function() {
@@ -30,7 +24,11 @@ describe('couple-api', function() {
         }
       };
 
-      var coupleAPI = nock('https://api-ssl.tenthbit.com', nockOpts)
+      var coupleAPI = nock('https://api-ssl.tenthbit.com', {
+          reqheaders: {
+            'x-juliet-ver': '1.70'
+          }
+        })
         .post('/authenticate', 'userID=jason%40example.com&secretKey=hunter2')
         .reply(401, res);
 
