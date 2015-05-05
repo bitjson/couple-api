@@ -6,9 +6,9 @@ var nock = require('nock');
 
 describe('couple-api', function() {
 
-  describe('client', function() {
+  describe('authenticate()', function() {
 
-    it('should have an authenticate method', function() {
+    it('should be a method', function() {
       var couple = new Couple();
       assert.equal(typeof couple, 'object');
       assert.equal(typeof couple.authenticate, 'function');
@@ -45,11 +45,50 @@ describe('couple-api', function() {
     //   //todo
     // });
 
+  });
+
+  describe('identify()', function() {
+
     it('should have an identify method', function() {
       var couple = new Couple();
       assert.equal(typeof couple, 'object');
       assert.equal(typeof couple.identify, 'function');
     });
+
+    it('should error when not authenticated', function() {
+      var couple = new Couple();
+      assert.throws(function() {
+          couple.identify();
+        },
+        /authenticate/
+      );
+    });
+
+    it('should error when `authObject` has no `user`', function() {
+      var couple = new Couple();
+      couple.authObject = {};
+      assert.throws(function() {
+          couple.identify();
+        },
+        /authenticate/
+      );
+    });
+
+    it('should error when `authObject` user has no `other`', function() {
+      var couple = new Couple();
+      couple.authObject = {
+        user: {}
+      };
+      assert.throws(function() {
+          couple.identify();
+        },
+        /authenticate/
+      );
+    });
+
+    // it('should identify the client', function() {
+    //   //todo
+    // });
 
   });
 
