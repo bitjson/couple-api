@@ -3,6 +3,16 @@
 var Couple = require('../');
 var assert = require('assert');
 var nock = require('nock');
+var expect = require('chai').expect;
+var fixtures = require('require-dir')('fixtures');
+
+function apiVersion(versionString) {
+  return {
+    reqheaders: {
+      'x-juliet-ver': versionString
+    }
+  };
+}
 
 describe('couple-api', function() {
 
@@ -15,35 +25,35 @@ describe('couple-api', function() {
     });
 
     it('should return the error and response object on authentication failure', function(done) {
-
-      var res = {
-        'error': 'Login failed: Invalid Email',
-        'details': {
-          'error': 'Login failed: Invalid Email',
-          'email': true
-        }
-      };
-
-      var coupleAPI = nock('https://api-ssl.tenthbit.com', {
-          reqheaders: {
-            'x-juliet-ver': '1.70'
-          }
-        })
+      var res = fixtures.loginFailedInvalidEmail;
+      var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
         .post('/authenticate', 'userID=jason%40example.com&secretKey=hunter2')
         .reply(401, res);
 
       var couple = new Couple();
       couple.authenticate('jason@example.com', 'hunter2', function(err, resObj) {
-        assert.deepEqual(err, new Error('Login Failed: Invalid Email'));
-        assert.deepEqual(resObj, res);
+        expect(err).to.deep.equal(new Error('Login Failed: Invalid Email'));
+        expect(resObj).to.deep.equal(res);
         coupleAPI.done();
         done();
       });
     });
 
-    // it('should authenticate and return a response object', function(){
-    //   //todo
-    // });
+    it('should authenticate and return a response object', function(done) {
+      var res = fixtures.simAuthObject();
+      var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
+        .post('/authenticate', 'userID=jason%40example.com&secretKey=hunter2')
+        .reply(401, res);
+
+      var couple = new Couple();
+      couple.authenticate('jason@example.com', 'hunter2', function(err, resObj) {
+        assert.ifError(err);
+        expect(resObj).to.deep.equal(res);
+        coupleAPI.done();
+        done();
+      });
+
+    });
 
   });
 

@@ -1,0 +1,7 @@
+{
+  "error": "Login failed: Invalid Email",
+  "details": {
+    "error": "Login failed: Invalid Email",
+    "email": true
+  }
+}

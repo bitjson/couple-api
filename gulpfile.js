@@ -35,10 +35,10 @@ gulp.task('jshint', function () {
 gulp.task('enforce-coverage', function () {
   var options = {
         thresholds : {
-          statements : 63,
-          branches : 37,
-          lines : 63,
-          functions : 75
+          statements : 81,
+          branches : 73,
+          lines : 81,
+          functions : 100
         },
         coverageDirectory : 'coverage',
         rootDirectory : ''
