@@ -96,9 +96,19 @@ describe('couple-api', function() {
       );
     });
 
-    // it('should identify the client', function() {
-    //   //todo
-    // });
+    it('should identify the client', function() {
+      var couple = new Couple();
+      couple.authObject = fixtures.simAuthObject();
+      var identifyObject = couple.identify();
+      expect(identifyObject).to.deep.equal({
+          userID: couple.authObject.user.userID,
+          authToken: couple.authObject.authenticationToken,
+          otherID: couple.authObject.user.other.userID,
+          apiHost: couple.authObject.base,
+          userHash: couple.authObject.user.uuid,
+          pairHash: couple.authObject.user.pairID
+        });
+    });
 
   });
 
