@@ -24,6 +24,14 @@ describe('couple-api', function() {
       assert.equal(typeof couple.authenticate, 'function');
     });
 
+    it('should return connection errors', function(done) {
+      var couple = new Couple();
+      couple.authenticate('jason@example.com', 'hunter2', function(err, resObj) {
+        expect(err.name).to.equal('NetConnectNotAllowedError');
+        done();
+      });
+    });
+
     it('should return the error and response object on authentication failure', function(done) {
       var res = fixtures.loginFailedInvalidEmail;
       var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
