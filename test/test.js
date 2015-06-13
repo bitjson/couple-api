@@ -47,6 +47,23 @@ describe('couple-api', function() {
       });
     });
 
+    it('should not break if Couple returns invalid JSON', function(done) {
+      var res = 'All your base are belong to us';
+      var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
+        .post('/authenticate', 'userID=jason%40example.com&secretKey=hunter2')
+        .reply(401, res);
+
+      var couple = new Couple();
+      couple.authenticate('jason@example.com', 'hunter2', function(err, resObj) {
+        expect(err).to.deep.equal(new Error('The Couple API returned invalid JSON'));
+        expect(resObj).to.deep.equal({
+          invalidJSON: res
+        });
+        coupleAPI.done();
+        done();
+      });
+    });
+
     it('should authenticate and return a response object', function(done) {
       var res = fixtures.simAuthObject();
       var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
@@ -109,13 +126,13 @@ describe('couple-api', function() {
       couple.authObject = fixtures.simAuthObject();
       var identifyObject = couple.identify();
       expect(identifyObject).to.deep.equal({
-          userID: couple.authObject.user.userID,
-          authToken: couple.authObject.authenticationToken,
-          otherID: couple.authObject.user.other.userID,
-          apiHost: couple.authObject.base,
-          userHash: couple.authObject.user.uuid,
-          pairHash: couple.authObject.user.pairID
-        });
+        userID: couple.authObject.user.userID,
+        authToken: couple.authObject.authenticationToken,
+        otherID: couple.authObject.user.other.userID,
+        apiHost: couple.authObject.base,
+        userHash: couple.authObject.user.uuid,
+        pairHash: couple.authObject.user.pairID
+      });
     });
 
   });
