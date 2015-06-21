@@ -5,12 +5,12 @@ Couple API
 
 An unofficial Node client and command-line interface for the Couple App API.
 
-Node API
---------
+Node Client
+-----------
 
 Before interacting with the Couple API, you'll need to authenticate your client instance.
 
-### Authenticate()
+### Authenticate
 
 The `authenticate` method retrieves your Couple App `authObject` using your username and password.
 
@@ -27,7 +27,76 @@ couple.authenticate(email, password, function(err, resObj) {
 });
 ```
 
-### Identify()
+### Timeline
 
-CLI
+### Sending
+
+Client API
+----------
+
+### authenticate(email, password, callback)
+
+### identify()
+
+### WIP: timeline(options, callback)
+
+Returns a segment of the authenticated user's Couple timeline.
+
+#### Options
+
+##### limit
+
+default: `1600`
+
+##### order
+
+default: ascending
+
+##### after
+
+default: `''`
+
+#### Callback(err, timeline)
+
+##### timeline
+
+The `timeline` object contains the `events` returned by the Couple API and additional properties.
+
+```js
+// timeline:
+{
+  'firstItemID': '',
+  'lastItemID': '',
+  'events': [
+    {},
+    {},
+    ...
+  ]
+}
+```
+
+##### events
+
+The Couple `timeline` contains several types of `events`.
+
+###### text
+
+The text event is a simple message.
+
+```js
+{
+  "cver": "i1.9.9", // couple version
+  "enc": "b64", // text encoding (the iOS app base64 encodes text)
+  "eventType": "text", // event type
+  "from": "jason@example.com", // email of sender
+  "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // unique identifier – timestamp with concatinated Uuid
+  "lID": "#########", // localID – number, seems to be used internally by the mobile apps
+  "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // the user's pairID
+  "text": "dGVzdAo=", // the text, encoded as defined in `enc`
+  "timeStamp": 1430522000000, // timestamp in milliseconds
+  "decodedText": "test" // `text` decoded by `couple-api`
+}
+```
+
+CLI (WIP)
 ===
