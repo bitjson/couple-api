@@ -3,7 +3,13 @@
 Couple API
 ==========
 
-An unofficial Node client and command-line interface for the Couple App API.
+An unofficial Node client and command-line interface for the [Couple App](https://couple.me/) API.
+
+An excellent [web client](https://app.couple.me/) is available for Couple, but it seems to be using a somewhat outdated version of Couple's internal API (&ldquo;Juliet&rdquo; Version: `1.40`). For stability and access to the latest features, this library is built around the API methods used by the Couple iOS app (&ldquo;Juliet&rdquo; Version: `1.70`).
+
+**WIP**
+
+This library is currently only intended for interaction with the Couple Timeline, and does not include methods for interacting with `Lists`, `Settings`, or the `Calendar`. Please feel free to [open an issue](https://github.com/bitjson/couple-api/issues), if you'd like to see it expanded!
 
 Node Client
 -----------
@@ -27,7 +33,29 @@ couple.authenticate(email, password, function(err, resObj) {
 });
 ```
 
-### Timeline
+### WIP: Timeline
+
+All events – messages, stickers, nudges (`Thinking of you...`), etc. – are recorded in the `Timeline`. Upon logging in, the mobile apps begin downloading the timeline, 1600 events at a time, fetching and downloading media as it's encountered.
+
+The `Timeline` function accepts an options object and a callback, and returns a `Timeline` object. The `Timeline` object includes all the information returned by the Couple API, as well as some convenience properties to make consecutive calls easier.
+
+```js
+var options = {
+  // using defaults:
+  // limit: 1600,
+  // order: ascending,
+  // after: ''
+};
+
+couple.timeline(options, function(err, timeline) {
+  if(err) return console.error(err);
+  console.log(timeline);
+});
+```
+
+#### Moments
+
+Note, the web app (API version `1.40`) has a `/moments` endpoint (not currently implemented in this library), but the mobile apps rely on caching the timeline to generate the `Moments` section.
 
 ### Sending
 
@@ -99,4 +127,4 @@ The text event is a simple message.
 ```
 
 CLI (WIP)
-===
+=========
