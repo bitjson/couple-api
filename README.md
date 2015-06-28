@@ -5,7 +5,7 @@ Couple API
 
 An unofficial Node client and command-line interface for the [Couple App](https://couple.me/) API.
 
-An excellent [web client](https://app.couple.me/) is available for Couple, but it seems to be using a somewhat outdated version of Couple's internal API (&ldquo;Juliet&rdquo; Version: `1.40`). For stability and access to the latest features, this library is built around the API methods used by the Couple iOS app (&ldquo;Juliet&rdquo; Version: `1.70`).
+An excellent [web client](https://app.couple.me/) is available for Couple, but it seems to be using a somewhat outdated version of Couple's internal API ("Juliet" Version: `1.40`). For stability and access to the latest features, this library is built around the API methods used by the Couple iOS app ("Juliet" Version: `1.70`).
 
 **WIP**
 
@@ -43,7 +43,7 @@ The `Timeline` function accepts an options object and a callback, and returns a 
 var options = {
   // using defaults:
   // limit: 1600,
-  // order: ascending,
+  // order: desc,
   // after: ''
 };
 
@@ -62,11 +62,45 @@ Note, the web app (API version `1.40`) has a `/moments` endpoint (not currently 
 Client API
 ----------
 
-### authenticate(email, password, callback)
+### Authenticate
 
-### identify()
+```js
+couple.authenticate(email, password, callback);
+```
 
-### WIP: timeline(options, callback)
+Authenticates the `couple-api` instance. The method fetches the users `AuthObject` which contains a variety of information and is needed to authenticate all other calls.
+
+#### Params
+
+| Name       | Description               |
+|------------|---------------------------|
+| `email`    | The user's email address. |
+| `password` | The user's password.      |
+
+#### callback(err, responseObject)
+
+### Identify
+
+```js
+couple.identify();
+```
+
+Returns an `identify` object.
+
+| Name        | Description                                                                           |
+|-------------|---------------------------------------------------------------------------------------|
+| `userID`    | The ID (email address) of the authenticated user.                                     |
+| `authToken` | The user's base64 encoded authentication token.                                       |
+| `otherID`   | The ID (email address) of the other user paired with the authenticated user.          |
+| `apiHost`   | The full URL for Couple API server assigned to the user (to which requests are made). |
+| `userHash`  | A unique version 4 UUID assigned to the user by Couple.                               |
+| `pairHash`  | A unique version 4 UUID assigned to the pair by Couple.                               |
+
+### WIP: Timeline
+
+```js
+couple.timeline(options, callback);
+```
 
 Returns a segment of the authenticated user's Couple timeline.
 
