@@ -64,6 +64,8 @@ Note, the web app (API version `1.40`) has a `/moments` endpoint (not currently 
 Client API
 ----------
 
+All library methods are documented below. This library strives for 100% test coverage, so examples of all implemented functionality and sample Couple API responses can be found in the [`test`](/test) directory.
+
 ### Authenticate
 
 ```js
@@ -80,6 +82,8 @@ Authenticates the `couple-api` instance. The method fetches the users `AuthObjec
 | `password` | The user's password.      |
 
 #### callback(err, responseObject)
+
+Called when the Couple API returns a response. All other methods can be called on the Couple instance after this callback is called.
 
 ### Identify
 
