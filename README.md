@@ -83,7 +83,7 @@ Authenticates the `couple-api` instance. The method fetches the users `AuthObjec
 
 #### callback(err, responseObject)
 
-Called when the Couple API returns a response. All other methods can be called on the Couple instance after this callback is called.
+Called when the Couple API returns a response. All other methods can be called on the Couple instance after this callback is called. See tests for more detail.
 
 ### Identify
 
@@ -120,6 +120,8 @@ Returns a segment of the authenticated user's Couple timeline.
 
 #### Callback(err, timeline)
 
+Called when the Couple API returns a response.
+
 ##### timeline
 
 The `timeline` object contains the `events` returned by the Couple API and additional properties.
@@ -127,11 +129,15 @@ The `timeline` object contains the `events` returned by the Couple API and addit
 ```js
 // timeline:
 {
-  'firstItemID': '',
-  'lastItemID': '',
+  'firstItemID': 'timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx',
+  'lastItemID': 'timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx',
   'events': [
-    {},
-    {},
+    {
+      // event object
+    },
+    {
+      // event object
+    },
     ...
   ]
 }
@@ -139,7 +145,15 @@ The `timeline` object contains the `events` returned by the Couple API and addit
 
 ##### events
 
-The Couple `timeline` contains several types of `events`.
+Every entry in the couple timeline is an `event`. The Couple `timeline` contains several types of `events`. All events have a number of similar properties.
+
+| Name        | Description                                                                                                                 |
+|-------------|-----------------------------------------------------------------------------------------------------------------------------|
+| `cver`      | Couple app version which created the event. Prefix `i` for iOS (eg. `i1.9.9`), `a` for android, and `w` for the web client. |
+| `eventType` | The event type.                                                                                                             |
+| `from`      | The email of the user who created the event.                                                                                |
+
+Each `eventType` also has a number of unique properties.
 
 ###### text
 
@@ -150,7 +164,7 @@ The text event is a simple message.
   "cver": "i1.9.9", // couple version
   "enc": "b64", // text encoding (the iOS app base64 encodes text)
   "eventType": "text", // event type
-  "from": "jason@example.com", // email of sender
+  "from": "user@example.com", // email of sender
   "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // unique identifier – timestamp with concatinated Uuid
   "lID": "#########", // localID – number, seems to be used internally by the mobile apps
   "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // the user's pairID
@@ -159,6 +173,36 @@ The text event is a simple message.
   "decodedText": "test" // `text` decoded by `couple-api`
 }
 ```
+
+###### pair
+
+```js
+  {
+    "eventType": "pair",
+    "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "timeStamp": 1430522000000,
+    "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "pairType": "pair"
+  }
+```
+
+###### sticker
+
+```js
+  {
+    "cver": "i1.9.9",
+    "eventType": "sticker",
+    "from": "user@example.com",
+    "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "lID": "#########",
+    "pack": 19,
+    "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "sticker": 3,
+    "timeStamp": 1430522000000
+  }
+```
+
+###### nudge
 
 WIP: CLI
 ========
