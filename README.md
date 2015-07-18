@@ -189,4 +189,16 @@ The text event is a simple message.
 
 ###### nudge
 
+```js
+  {
+    "cver": "i1.9.9",
+    "eventType": "nudge",
+    "from": "user@example.com",
+    "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "lID": "#########",
+    "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
+    "timeStamp": 1430522000000
+  }
+```
+
 # WIP: CLI
