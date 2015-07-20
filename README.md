@@ -54,6 +54,11 @@ Note, the web app (API version `1.40`) has a `/moments` endpoint (not currently 
 [Coming soon...]
 
 ## Client API
+
+```js
+var couple = require('couple-api');
+```
+
 All library methods are documented below. This library strives for 100% test coverage, so examples of all implemented functionality and sample Couple API responses can be found in the [`test`](/test) directory.
 
 ### Authenticate
@@ -131,47 +136,42 @@ The `timeline` object contains the `events` returned by the Couple API and addit
 ```
 
 ##### events
-Every entry in the couple timeline is an `event`. The Couple `timeline` contains several types of `events`. All events have a number of similar properties.
+Every entry in the Couple `timeline` is an `event`. The Couple timeline contains several types of events. All events have a number of similar properties.
 
-Name        | Description
------------ | ---------------------------------------------------------------------------------------------------------------------------
+Property    | Value
+----------- | ----------------------------------------------------------------------------------------------------------------------------------
 `cver`      | Couple app version which created the event. Prefix `i` for iOS (eg. `i1.9.9`), `a` for android, and `w` for the web client.
 `eventType` | The event type.
 `from`      | The email of the user who created the event.
+`itemID`    | A unique identifier – the event's timestamp, concatenated with a version 4 UUID. (`timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx`)
+`lID`       | A unique 9 character, numerical ID – seems to be used internally by the mobile apps.
+`pairingID` | A unique version 4 UUID assigned to the pair by Couple.
+`timeStamp` | The timestamp of the event in milliseconds.
 
 Each `eventType` also has a number of unique properties.
 
 ###### text
-The text event is a simple message.
+The text event is a normal message.
 
-```js
-{
-  "cver": "i1.9.9", // couple version
-  "enc": "b64", // text encoding (the iOS app base64 encodes text)
-  "eventType": "text", // event type
-  "from": "user@example.com", // email of sender
-  "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // unique identifier – timestamp with concatinated Uuid
-  "lID": "#########", // localID – number, seems to be used internally by the mobile apps
-  "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx", // the user's pairID
-  "text": "dGVzdAo=", // the text, encoded as defined in `enc`
-  "timeStamp": 1430522000000, // timestamp in milliseconds
-  "decodedText": "test" // `text` decoded by `couple-api`
-}
-```
+Property      | Value
+------------- | ------------------------------------------------------------------------------------------------------------------------------------
+`eventType`   | Set to `text`.
+`enc`         | Text encoding. Only set on `text` events sent from the iOS app, which base64 encodes the `text` field. When set, the value is `b64`.
+`text`        | The contents of the message. May be base64 encoded.
+`decodedText` | Property added to all `text` events by `couple-api`. Always contains the contents of the message.
 
 ###### pair
+The pair event is the first event in the timeline.
 
-```js
-  {
-    "eventType": "pair",
-    "pairingID": "xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
-    "timeStamp": 1430522000000,
-    "itemID": "timeStampxxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx",
-    "pairType": "pair"
-  }
-```
+Property    | Value
+----------- | ---------------------------------
+`eventType` | Set to `pair`.
+`pairType`  | Seems to always be set to `pair`.
+
+The `pair` event does not contain the `cver`, `from`, or `lID` properties.
 
 ###### sticker
+The sticker event displays a sticker from a Couple sticker pack.
 
 ```js
   {
