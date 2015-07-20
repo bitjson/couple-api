@@ -130,8 +130,8 @@ describe('couple-api', function() {
         authToken: couple.authObject.authenticationToken,
         otherID: couple.authObject.user.other.userID,
         apiHost: couple.authObject.base,
-        userHash: couple.authObject.user.uuid,
-        pairHash: couple.authObject.user.pairID
+        userUuid: couple.authObject.user.uuid,
+        pairUuid: couple.authObject.user.pairID
       });
     });
 

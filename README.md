@@ -88,8 +88,8 @@ Name        | Description
 `authToken` | The user's base64 encoded authentication token.
 `otherID`   | The ID (email address) of the other user paired with the authenticated user.
 `apiHost`   | The full URL for Couple API server assigned to the user (to which requests are made).
-`userHash`  | A unique version 4 UUID assigned to the user by Couple.
-`pairHash`  | A unique version 4 UUID assigned to the pair by Couple.
+`userUuid`  | A unique version 4 UUID assigned to the user by Couple.
+`pairUuid`  | A unique version 4 UUID assigned to the pair by Couple.
 
 ### WIP: Timeline
 
