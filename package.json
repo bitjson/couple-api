@@ -1,6 +1,6 @@
 {
   "name": "couple-api",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "description": "An unofficial client for the Couple App API.",
   "main": "lib/couple.js",
   "bin": {
