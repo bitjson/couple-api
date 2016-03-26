@@ -26,8 +26,13 @@ describe('couple-api', function() {
 
     it('should return connection errors', function(done) {
       var couple = new Couple();
+      var coupleAPI = nock('https://api-ssl.tenthbit.com', apiVersion('1.70'))
+        .post('/authenticate', 'userID=jason%40example.com&secretKey=hunter2')
+        .replyWithError('something broke');
+
       couple.authenticate('jason@example.com', 'hunter2', function(err, resObj) {
-        expect(err.name).to.equal('NetConnectNotAllowedError');
+        expect(err.message).to.equal('something broke');
+        coupleAPI.done();
         done();
       });
     });
