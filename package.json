@@ -34,7 +34,7 @@
     "coveralls": "^2.11.9",
     "cz-conventional-changelog": "^1.1.5",
     "del": "^2.2.0",
-    "ghooks": "^1.0.3",
+    "ghooks": "^1.2.2",
     "gulp": "^3.8.11",
     "gulp-if": "^2.0.0",
     "gulp-istanbul-enforcer": "^1.0.3",
