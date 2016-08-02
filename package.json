@@ -40,7 +40,7 @@
     "gulp-istanbul-enforcer": "^1.0.3",
     "gulp-jshint": "^2.0.0",
     "gulp-load-plugins": "^1.2.0",
-    "gulp-mocha": "^2.0.0",
+    "gulp-mocha": "^3.0.0",
     "gulp-shell": "^0.5.2",
     "istanbul": "^0.4.2",
     "jshint-stylish": "^2.1.0",
