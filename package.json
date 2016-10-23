@@ -46,7 +46,7 @@
     "jshint-stylish": "^2.1.0",
     "mocha": "^2.2.1",
     "mocha-lcov-reporter": "1.2.0",
-    "nock": "^7.7.2",
+    "nock": "^9.0.0",
     "pre-commit": "^1.0.7",
     "require-dir": "^0.3.0",
     "run-sequence": "^1.0.2",
